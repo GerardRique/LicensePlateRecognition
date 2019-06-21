@@ -1,14 +1,19 @@
 import SegmentCharacters
 import pickle
+import matplotlib.pyplot as plt
+
 print("Loading model")
-filename = './finalized_model.sav'
+filename = './MLP_finalized_model.sav'
 model = pickle.load(open(filename, 'rb'))
+fig, ax1 = plt.subplots(1)
 
 print('Model loaded. Predicting characters of number plate')
 classification_result = []
 for each_character in SegmentCharacters.characters:
     # converts it to a 1D array
-    each_character = each_character.reshape(1, -1);
+    
+    ax1.imshow(each_character, cmap="gray")
+    each_character = each_character.reshape(1, -1)
     result = model.predict(each_character)
     classification_result.append(result)
 
